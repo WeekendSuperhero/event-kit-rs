@@ -1,0 +1,57 @@
+[package]
+name = "eventkit-rs"
+version = "0.1.1"
+edition = "2024"
+description = "A Rust library and CLI for managing macOS Calendar events and Reminders via EventKit"
+license = "MIT"
+repository = "https://github.com/weekendsuperhero/eventkit-rs"
+documentation = "https://docs.rs/eventkit-rs"
+homepage = "https://github.com/weekendsuperhero/eventkit-rs"
+readme = "README.md"
+keywords = ["macos", "calendar", "reminders", "eventkit", "apple"]
+categories = ["api-bindings", "os::macos-apis"]
+authors = ["WeekendSuperhero <weekend@weekendsuperhero.io>"]
+rust-version = "1.92"
+
+[[bin]]
+name = "eventkit"
+path = "src/main.rs"
+
+[lib]
+name = "eventkit"
+path = "src/lib.rs"
+
+[dependencies]
+objc2 = "0.6"
+objc2-event-kit = { version = "0.3.2", features = [
+    "EKEventStore",
+    "EKEvent",
+    "EKReminder",
+    "EKCalendar",
+    "EKCalendarItem",
+    "EKObject",
+    "EKSource",
+] }
+objc2-foundation = { version = "0.3.2", features = [
+    "NSString",
+    "NSArray",
+    "NSDate",
+    "NSCalendar",
+    "NSError",
+    "NSPredicate",
+] }
+block2 = "0.6"
+clap = { version = "4", features = ["derive"] }
+chrono = "0.4"
+thiserror = "2"
+
+[dev-dependencies]
+# For future tests
+
+[features]
+default = ["reminders", "events"]
+reminders = []
+events = []
+
+[package.metadata.docs.rs]
+targets = ["x86_64-apple-darwin", "aarch64-apple-darwin"]
